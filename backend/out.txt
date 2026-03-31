@@ -1,0 +1,273 @@
+﻿.\venv\bin\python.exe : Traceback (most 
+recent call last):
+At line:1 char:1
++ .\venv\bin\python.exe test_seed.py *>&1 
+| Out-File -FilePath out.txt  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecifie 
+   d: (Traceback (most recent call last)  
+  ::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeComma 
+   ndError
+ 
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\djongo\sql2mongo\query.py", line 
+857, in parse
+    return handler(self, statement)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\djongo\sql2mongo\query.py", line 
+929, in _insert
+    query.execute()
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\djongo\sql2mongo\query.py", line 
+397, in execute
+    res = self.db[self.left_table].insert_
+many(docs, ordered=False)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\pymongo\collection.py", line 770, 
+in insert_many
+    blk.execute(write_concern, 
+session=session)
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\pymongo\bulk.py", line 533, in 
+execute
+    return 
+self.execute_command(generator, 
+write_concern, session)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\pymongo\bulk.py", line 366, in 
+execute_command
+    _raise_bulk_write_error(full_result)
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\pymongo\bulk.py", line 140, in 
+_raise_bulk_write_error
+    raise BulkWriteError(full_result)
+pymongo.errors.BulkWriteError: batch op 
+errors occurred, full error: 
+{'writeErrors': [{'index': 0, 'code': 
+11000, 'errmsg': 'E11000 duplicate key 
+error collection: campuz_db.users index: 
+enrollment_no_1 dup key: { enrollment_no: 
+null }', 'keyPattern': {'enrollment_no': 
+1}, 'keyValue': {'enrollment_no': None}, 
+'op': {'id': 9, 'password': 'pbkdf2_sha256
+$390000$89x74fohLZ8SbROiWj0fKj$Npd3ZrrAEOu
+nFdB/AI2OAMMPJdprXZk1Q46ObG0M/40=', 
+'last_login': None, 'is_superuser': 
+False, 'username': 'hod_cs_3', 
+'first_name': '', 'last_name': '', 
+'is_staff': False, 'is_active': True, 
+'date_joined': datetime.datetime(2026, 3, 
+31, 23, 42, 56, 676788), 'email': 
+'hod3@campuz.com', 'role': 'hod', 
+'department': 'Computer Science', 
+'enrollment_no': None, 'phone': None, 
+'profile_picture': None, 'created_at': 
+datetime.datetime(2026, 3, 31, 23, 42, 
+56, 676788), 'updated_at': 
+datetime.datetime(2026, 3, 31, 23, 42, 
+56, 985721), '_id': 
+ObjectId('69cc5c014050cdbbaa508f96')}}], 
+'writeConcernErrors': [], 'nInserted': 0, 
+'nUpserted': 0, 'nMatched': 0, 
+'nModified': 0, 'nRemoved': 0, 
+'upserted': []}
+
+The above exception was the direct cause 
+of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\djongo\cursor.py", line 51, in 
+execute
+    self.result = Query(
+                  ^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\djongo\sql2mongo\query.py", line 
+784, in __init__
+    self._query = self.parse()
+                  ^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\djongo\sql2mongo\query.py", line 
+869, in parse
+    raise exe from e
+djongo.exceptions.SQLDecodeError: 
+
+	Keyword: None
+	Sub SQL: None
+	FAILED SQL: INSERT INTO "users" 
+("password", "last_login", 
+"is_superuser", "username", "first_name", 
+"last_name", "is_staff", "is_active", 
+"date_joined", "email", "role", 
+"department", "enrollment_no", "phone", 
+"profile_picture", "created_at", 
+"updated_at") VALUES (%(0)s, %(1)s, 
+%(2)s, %(3)s, %(4)s, %(5)s, %(6)s, %(7)s, 
+%(8)s, %(9)s, %(10)s, %(11)s, %(12)s, 
+%(13)s, %(14)s, %(15)s, %(16)s)
+	Params: ['pbkdf2_sha256$390000$89x74fohLZ
+8SbROiWj0fKj$Npd3ZrrAEOunFdB/AI2OAMMPJdprX
+Zk1Q46ObG0M/40=', None, False, 
+'hod_cs_3', '', '', False, True, 
+datetime.datetime(2026, 3, 31, 23, 42, 
+56, 676788), 'hod3@campuz.com', 'hod', 
+'Computer Science', None, None, None, 
+datetime.datetime(2026, 3, 31, 23, 42, 
+56, 676788), datetime.datetime(2026, 3, 
+31, 23, 42, 56, 985721)]
+	Version: 1.3.6
+
+The above exception was the direct cause 
+of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\backends\utils.py", 
+line 89, in _execute
+    return self.cursor.execute(sql, 
+params)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\djongo\cursor.py", line 59, in 
+execute
+    raise db_exe from e
+djongo.database.DatabaseError
+
+The above exception was the direct cause 
+of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\test_seed.py", line 10, 
+in <module>
+    User.objects.create_user('hod_cs_3', 
+'hod3@campuz.com', 'pwd_hod', role='hod', 
+department='Computer Science')
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\contrib\auth\models.py", 
+line 161, in create_user
+    return self._create_user(username, 
+email, password, **extra_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\contrib\auth\models.py", 
+line 155, in _create_user
+    user.save(using=self._db)
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\contrib\auth\base_user.py",
+ line 69, in save
+    super().save(*args, **kwargs)
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\models\base.py", line 
+812, in save
+    self.save_base(
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\models\base.py", line 
+863, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\models\base.py", line 
+1006, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\models\base.py", line 
+1047, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\models\manager.py", 
+line 85, in manager_method
+    return getattr(self.get_queryset(), 
+name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\models\query.py", line 
+1791, in _insert
+    return query.get_compiler(using=using)
+.execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\models\sql\compiler.py",
+ line 1660, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\backends\utils.py", 
+line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\backends\utils.py", 
+line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\backends\utils.py", 
+line 80, in _execute_with_wrappers
+    return executor(sql, params, many, 
+context)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\backends\utils.py", 
+line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\utils.py", line 91, in 
+__exit__
+    raise 
+dj_exc_value.with_traceback(traceback) 
+from exc_value
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\django\db\backends\utils.py", 
+line 89, in _execute
+    return self.cursor.execute(sql, 
+params)
+           
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heyit\Desktop\Campuz-appl
+ication\backend\venv\lib\python3.12\site-p
+ackages\djongo\cursor.py", line 59, in 
+execute
+    raise db_exe from e
+django.db.utils.DatabaseError

@@ -14,7 +14,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='student')
     department = models.CharField(max_length=100, blank=True, null=True)
-    enrollment_no = models.CharField(max_length=50, blank=True, null=True, unique=True)
+    enrollment_no = models.CharField(max_length=50, blank=True, null=True)
     phone = models.CharField(max_length=15, blank=True, null=True)
     profile_picture = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(default=timezone.now)

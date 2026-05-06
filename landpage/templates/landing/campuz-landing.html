@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campuz — Your Campus, Connected</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 64px;
+            border-bottom: 1px solid #e8e8e8;
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #1a1a1a;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            color: #555;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #1a1a1a;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .btn-signin {
+            padding: 0.45rem 1.1rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #2563eb;
+            border: 1.5px solid #2563eb;
+            border-radius: 6px;
+            background: transparent;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .btn-signin:hover {
+            background: #eff6ff;
+        }
+
+        .btn-signup {
+            padding: 0.45rem 1.1rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #fff;
+            background: #2563eb;
+            border: 1.5px solid #2563eb;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-signup:hover {
+            background: #1d4ed8;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 90px 5% 80px;
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #eff6ff;
+            color: #2563eb;
+            font-size: 0.78rem;
+            font-weight: 500;
+            padding: 0.3rem 0.9rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: #0f172a;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: #64748b;
+            max-width: 520px;
+            margin: 0 auto 2.2rem;
+            line-height: 1.75;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 0.75rem 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-secondary {
+            padding: 0.75rem 1.8rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #374151;
+            background: #f3f4f6;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        /* FEATURES */
+        .features {
+            background: #f8fafc;
+            padding: 70px 5%;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.3px;
+        }
+
+        .features-sub {
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.6rem;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: #eff6ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.4rem;
+        }
+
+        .feature-card p {
+            font-size: 0.88rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* HOW IT WORKS */
+        .how {
+            padding: 70px 5%;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .how h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.3px;
+        }
+
+        .how-sub {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 3rem;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-num {
+            width: 44px;
+            height: 44px;
+            background: #2563eb;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0 auto 0.9rem;
+        }
+
+        .step h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.4rem;
+        }
+
+        .step p {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        /* CTA STRIP */
+        .cta-strip {
+            background: #2563eb;
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .cta-strip h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.6rem;
+        }
+
+        .cta-strip p {
+            color: #bfdbfe;
+            font-size: 0.95rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .btn-white {
+            padding: 0.75rem 2rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #2563eb;
+            background: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-white:hover {
+            background: #f0f9ff;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 50px 5% 30px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-brand .logo {
+            color: #fff;
+            display: block;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .footer-brand .logo span {
+            color: #93c5fd;
+        }
+
+        .footer-brand p {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            line-height: 1.65;
+            max-width: 240px;
+        }
+
+        .footer-col h4 {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+        }
+
+        .footer-col ul li a {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: #f1f5f9;
+        }
+
+        .footer-contact p {
+            font-size: 0.88rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #1e293b;
+            padding-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            font-size: 0.82rem;
+            color: #475569;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .footer-bottom-links a {
+            font-size: 0.82rem;
+            color: #475569;
+            transition: color 0.2s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: #94a3b8;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="{% url 'landing' %}" class="logo">Camp<span>uz</span></a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-buttons">
+            <a href="{% url 'signin' %}" class="btn-signin">Sign In</a>
+            <a href="{% url 'signup' %}" class="btn-signup">Sign Up</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <span class="hero-badge">🎓 Built for students & institutions</span>
+        <h1>Your Campus,<br><span>Connected.</span></h1>
+        <p>Campuz brings students, faculty, and campus life together on one simple platform — events, resources,
+            communities, and more.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'signup' %}" class="btn-primary">Get Started </a>
+            <a href="#how" class="btn-secondary">Learn More</a>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <h2>Everything you need on campus</h2>
+        <p class="features-sub">Simple tools to help students and faculty stay connected and informed.</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>Campus Events</h3>
+                <p>Discover and RSVP to events happening around your campus in real time.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Community Forums</h3>
+                <p>Join discussions, ask questions, and connect with your peers and faculty.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Study Resources</h3>
+                <p>Access notes, past papers, and shared resources uploaded by your community.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔔</div>
+                <h3>Notices & Updates</h3>
+                <p>Stay on top of announcements from your department and administration.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how" id="how">
+        <h2>How it works</h2>
+        <p class="how-sub">Get started in minutes — no complicated setup needed.</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h4>Create your account</h4>
+                <p>Sign up with your college email and set up your profile in seconds.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h4>Join your campus</h4>
+                <p>Find and join your institution to access your campus community.</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h4>Stay connected</h4>
+                <p>Explore events, join groups, and never miss an important update again.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-strip">
+        <h2>Ready to join your campus?</h2>
+        <p>Sign up for free and connect with your campus community today.</p>
+        <a href="{% url 'signup' %}" class="btn-white">Create Free Account</a>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="{% url 'landing' %}" class="logo">Camp<span>uz</span></a>
+                <p>Campuz is a campus connectivity platform helping students and educators stay informed, engaged, and
+                    connected.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how">How it works</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Updates</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact">
+                <h4>Contact</h4>
+                <p>📧 hello@campuz.app</p>
+                <p>📞 +91 98765 43210</p>
+                <p>📍 Bhopal, Madhya Pradesh, India</p>
+                <br>
+                <p style="font-size:0.82rem;color:#64748b;">Mon – Fri, 9am – 6pm IST</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Campuz. All rights reserved.</p>
+            <ul class="footer-bottom-links">
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</body>
+
+</html>

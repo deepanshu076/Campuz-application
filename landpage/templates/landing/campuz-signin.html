@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campuz — Sign In</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 64px;
+            border-bottom: 1px solid #e8e8e8;
+            background: #fff;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #1a1a1a;
+        }
+
+        .nav-right {
+            font-size: 0.88rem;
+            color: #64748b;
+        }
+
+        .nav-right a {
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .nav-right a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2.5rem 2.2rem;
+            width: 100%;
+            max-width: 420px;
+        }
+
+        /* CARD HEADER */
+        .card-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .card-icon {
+            width: 52px;
+            height: 52px;
+            background: #eff6ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .card-header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.3rem;
+            letter-spacing: -0.3px;
+        }
+
+        .card-header p {
+            font-size: 0.88rem;
+            color: #64748b;
+        }
+
+        /* MESSAGES */
+        .messages {
+            margin-bottom: 1.2rem;
+        }
+
+        .msg {
+            font-size: 0.85rem;
+            padding: 0.65rem 0.9rem;
+            border-radius: 7px;
+            margin-bottom: 0.5rem;
+            border: 1px solid transparent;
+        }
+
+        .msg-error {
+            background: #fef2f2;
+            border-color: #fecaca;
+            color: #dc2626;
+        }
+
+        .msg-success {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #16a34a;
+        }
+
+        .msg-warning {
+            background: #fffbeb;
+            border-color: #fef3c7;
+            color: #d97706;
+        }
+
+        /* FORM */
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.4rem;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92rem;
+            color: #0f172a;
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 7px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        input::placeholder {
+            color: #94a3b8;
+        }
+
+        /* PASSWORD TOGGLE */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 2.8rem;
+        }
+
+        .toggle-pw {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #94a3b8;
+            font-size: 1rem;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .toggle-pw:hover {
+            color: #64748b;
+        }
+
+        .forgot {
+            display: block;
+            text-align: right;
+            font-size: 0.8rem;
+            color: #2563eb;
+            margin-top: 0.4rem;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+        /* BUTTONS */
+        .btn-submit {
+            width: 100%;
+            padding: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
+            background: #1d4ed8;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1.4rem 0;
+            color: #cbd5e1;
+            font-size: 0.8rem;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .btn-create {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #2563eb;
+            background: #eff6ff;
+            border: 1.5px solid #bfdbfe;
+            border-radius: 7px;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s;
+        }
+
+        .btn-create:hover {
+            background: #dbeafe;
+        }
+
+        .card-footer {
+            text-align: center;
+            font-size: 0.82rem;
+            color: #64748b;
+            margin-top: 1.4rem;
+        }
+
+        .card-footer a {
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .card-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* PAGE FOOTER */
+        footer {
+            text-align: center;
+            padding: 1.2rem;
+            font-size: 0.78rem;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+            background: #fff;
+        }
+
+        footer a {
+            color: #64748b;
+            margin: 0 0.4rem;
+        }
+
+        footer a:hover {
+            color: #1a1a1a;
+        }
+
+        .role-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-tab {
+            padding: 0.6rem 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #64748b;
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 7px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.18s;
+        }
+
+        .role-tab:hover {
+            border-color: #93c5fd;
+            color: #2563eb;
+            background: #f0f9ff;
+        }
+
+        .role-tab.active {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            margin: 0 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="{% url 'landing' %}" class="logo">Camp<span>uz</span></a>
+        <span class="nav-right">New here? <a href="{% url 'signup' %}">Create an account</a></span>
+    </nav>
+
+    <main>
+        <div class="card">
+
+            <div class="card-header">
+                <div class="card-icon">🎓</div>
+                <h1>Welcome back</h1>
+                <p>Sign in to your Campuz account</p>
+            </div>
+
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div
+                    class="msg {% if message.tags == 'error' %}msg-error{% elif message.tags == 'success' %}msg-success{% else %}msg-warning{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="POST" action="{% url 'signin' %}" id="signin-form">
+                {% csrf_token %}
+
+                <div class="section-label">Sign in as</div>
+                <input type="hidden" name="role" id="role-input" value="student">
+                <div class="role-tabs">
+                    <button type="button" class="role-tab active" id="tab-student" onclick="selectRole('student')">🎒 Student</button>
+                    <button type="button" class="role-tab" id="tab-faculty" onclick="selectRole('faculty')">👨‍🏫 Faculty</button>
+                    <button type="button" class="role-tab" id="tab-admin" onclick="selectRole('admin')">🔐 Admin</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="identifier" id="identifier-label">Enrollment Number</label>
+                    <input type="text" id="identifier" name="identifier" placeholder="Enter your enrollment number"
+                        autocomplete="username" value="{{ request.POST.identifier|default:'' }}" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Enter your password"
+                            autocomplete="current-password" required />
+                        <button type="button" class="toggle-pw" onclick="togglePw()">👁</button>
+                    </div>
+                    <a href="#" class="forgot">Forgot password?</a>
+                </div>
+
+                <button type="button" class="btn-submit" onclick="document.getElementById('signin-form').submit();">Sign In</button>
+            </form>
+
+            <div class="divider">or</div>
+
+            <a href="{% url 'signup' %}" class="btn-create">Create New Account</a>
+
+            <p class="card-footer">
+                By signing in you agree to our
+                <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.
+            </p>
+
+        </div>
+    </main>
+
+    <footer>
+        <span>© 2026 Campuz.</span>
+        <a href="#">Help</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="{% url 'landing' %}">Home</a>
+    </footer>
+
+    <script>
+        let currentRole = 'student';
+
+        function selectRole(role) {
+            currentRole = role;
+            document.getElementById('role-input').value = role;
+
+            // Update tabs UI
+            ['student', 'faculty', 'admin'].forEach(r => {
+                document.getElementById('tab-' + r).classList.toggle('active', r === role);
+            });
+
+            // Update label and placeholder
+            const label = document.getElementById('identifier-label');
+            const input = document.getElementById('identifier');
+
+            if (role === 'student') {
+                label.textContent = 'Enrollment Number';
+                input.placeholder = 'Enter your enrollment number';
+            } else if (role === 'faculty') {
+                label.textContent = 'Employee ID';
+                input.placeholder = 'Enter your employee ID';
+            } else if (role === 'admin') {
+                label.textContent = 'Admin ID';
+                input.placeholder = 'Enter your admin ID';
+            }
+        }
+
+        function togglePw() {
+            const pw = document.getElementById('password');
+            if (pw.type === 'password') {
+                pw.type = 'text';
+            } else {
+                pw.type = 'password';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

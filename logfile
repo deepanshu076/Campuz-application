@@ -1,0 +1,8 @@
+2026-04-26 01:50:34.290 IST [120327] LOG:  redirecting log output to logging collector process
+2026-04-26 01:50:34.290 IST [120327] HINT:  Future log output will appear in directory "log".
+2026-04-26 01:53:31.381 IST [121075] FATAL:  lock file "postmaster.pid" already exists
+2026-04-26 01:53:31.381 IST [121075] HINT:  Is another postmaster (PID 120327) running in data directory "/home/admin/pgdata"?
+2026-04-26 01:54:00.518 IST [121228] LOG:  redirecting log output to logging collector process
+2026-04-26 01:54:00.518 IST [121228] HINT:  Future log output will appear in directory "log".
+2026-04-26 01:54:35.688 IST [121490] LOG:  redirecting log output to logging collector process
+2026-04-26 01:54:35.688 IST [121490] HINT:  Future log output will appear in directory "log".

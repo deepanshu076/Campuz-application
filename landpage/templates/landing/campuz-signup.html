@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campuz — Create Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            height: 64px;
+            border-bottom: 1px solid #e8e8e8;
+            background: #fff;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2563eb;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: #1a1a1a;
+        }
+
+        .nav-right {
+            font-size: 0.88rem;
+            color: #64748b;
+        }
+
+        .nav-right a {
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .nav-right a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 3rem 1.5rem;
+        }
+
+        .card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 2.5rem 2.2rem;
+            width: 100%;
+            max-width: 460px;
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 1.8rem;
+        }
+
+        .card-icon {
+            width: 52px;
+            height: 52px;
+            background: #eff6ff;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .card-header h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-header p {
+            font-size: 0.88rem;
+            color: #64748b;
+        }
+
+        .messages {
+            margin-bottom: 1.2rem;
+        }
+
+        .msg-error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            font-size: 0.85rem;
+            padding: 0.65rem 0.9rem;
+            border-radius: 7px;
+            margin-bottom: 0.5rem;
+        }
+
+        .msg-success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #16a34a;
+            font-size: 0.85rem;
+            padding: 0.65rem 0.9rem;
+            border-radius: 7px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #94a3b8;
+            margin: 1.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .form-group {
+            margin-bottom: 1.1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.9rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.84rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.4rem;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #0f172a;
+            background: #fff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 7px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        input::placeholder {
+            color: #94a3b8;
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            padding-right: 2.2rem;
+            cursor: pointer;
+        }
+
+        .input-hint {
+            font-size: 0.76rem;
+            color: #94a3b8;
+            margin-top: 0.28rem;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 2.8rem;
+        }
+
+        .toggle-pw {
+            position: absolute;
+            right: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #94a3b8;
+            font-size: 1rem;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .toggle-pw:hover {
+            color: #64748b;
+        }
+
+        .pw-match {
+            font-size: 0.76rem;
+            margin-top: 0.28rem;
+        }
+
+        .pw-match.ok {
+            color: #16a34a;
+        }
+
+        .pw-match.err {
+            color: #dc2626;
+        }
+
+        .role-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-tab {
+            padding: 0.6rem 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #64748b;
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 7px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.18s;
+        }
+
+        .role-tab:hover {
+            border-color: #93c5fd;
+            color: #2563eb;
+            background: #f0f9ff;
+        }
+
+        .role-tab.active {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #2563eb;
+            font-weight: 600;
+        }
+
+        .role-fields {
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .role-fields.visible {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .role-info-box {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 7px;
+            padding: 0.7rem 0.9rem;
+            font-size: 0.82rem;
+            color: #0369a1;
+            margin-bottom: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 0.78rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            background: #2563eb;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-top: 1.6rem;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: #1d4ed8;
+        }
+
+        .btn-submit:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+        }
+
+        .submit-hint {
+            font-size: 0.76rem;
+            color: #94a3b8;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .submit-hint.ready {
+            color: #16a34a;
+        }
+
+        .card-footer {
+            text-align: center;
+            font-size: 0.82rem;
+            color: #64748b;
+            margin-top: 1.4rem;
+        }
+
+        .card-footer a {
+            color: #2563eb;
+            font-weight: 500;
+        }
+
+        .card-footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.2rem;
+            font-size: 0.78rem;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+            background: #fff;
+            margin-top: auto;
+        }
+
+        footer a {
+            color: #64748b;
+            margin: 0 0.4rem;
+        }
+
+        footer a:hover {
+            color: #1a1a1a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="{% url 'landing' %}" class="logo">Camp<span>uz</span></a>
+        <span class="nav-right">Already have an account? <a href="{% url 'signin' %}">Sign In</a></span>
+    </nav>
+
+    <main>
+        <div class="card">
+
+            <div class="card-header">
+                <div class="card-icon">🎓</div>
+                <h1>Create your account</h1>
+                <p>Join your campus community on Campuz</p>
+            </div>
+
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="{% if message.tags == 'error' %}msg-error{% else %}msg-success{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="POST" action="/signup/" id="signup-form" enctype="application/x-www-form-urlencoded">
+                {% csrf_token %}
+
+                <!-- BASIC INFO -->
+                <div class="section-label">Basic Information</div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="e.g. rahul_sharma"
+                        value="{{ request.POST.username }}" autocomplete="off" oninput="checkForm()" required />
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="contact">Contact Number</label>
+                        <input type="tel" id="contact" name="contact" placeholder="+91 XXXXX XXXXX"
+                            value="{{ request.POST.contact }}" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@college.edu"
+                            value="{{ request.POST.email }}" oninput="checkForm()" required />
+                    </div>
+                </div>
+
+                <!-- PASSWORD -->
+                <div class="section-label">Set Password</div>
+
+                <div class="form-group">
+                    <label for="password">Create Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Min. 8 characters"
+                            oninput="checkPw()" required />
+                        <button type="button" class="toggle-pw" onclick="togglePw('password')">👁</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="confirm_password" name="confirm_password"
+                            placeholder="Re-enter your password" oninput="checkPw()" required />
+                        <button type="button" class="toggle-pw" onclick="togglePw('confirm_password')">👁</button>
+                    </div>
+                    <div class="pw-match" id="pw-msg"></div>
+                </div>
+
+                <!-- ROLE -->
+                <div class="section-label">I am a...</div>
+
+                <input type="hidden" name="role" id="role-input" value="" />
+
+                <div class="role-tabs">
+                    <button type="button" class="role-tab" id="tab-student" onclick="selectRole('student')">🎒
+                        Student</button>
+                    <button type="button" class="role-tab" id="tab-faculty" onclick="selectRole('faculty')">👨‍🏫
+                        Faculty</button>
+                    <button type="button" class="role-tab" id="tab-admin" onclick="selectRole('admin')">🔐
+                        Admin</button>
+                </div>
+
+                <!-- STUDENT -->
+                <div class="role-fields" id="fields-student">
+                    <div class="role-info-box">ℹ️ Enter your college-issued enrollment details.</div>
+                    <div class="form-group">
+                        <label for="enrollment_number">Enrollment Number</label>
+                        <input type="text" id="enrollment_number" name="enrollment_number"
+                            placeholder="e.g. 0101CS221001" oninput="checkForm()" />
+                    </div>
+                    <div class="form-group">
+                        <label for="course">Course / Branch</label>
+                        <select id="course" name="course" onchange="checkForm()">
+                            <option value="">Select your course</option>
+                            <option>B.Tech – Computer Science</option>
+                            <option>B.Tech – Electronics</option>
+                            <option>B.Tech – Mechanical</option>
+                            <option>B.Tech – Civil</option>
+                            <option>BCA</option>
+                            <option>MCA</option>
+                            <option>MBA</option>
+                            <option>B.Sc</option>
+                            <option>M.Tech</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="year">Year</label>
+                            <select id="year" name="year" onchange="checkForm()">
+                                <option value="">Year</option>
+                                <option>1st Year</option>
+                                <option>2nd Year</option>
+                                <option>3rd Year</option>
+                                <option>4th Year</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Semester</label>
+                            <select id="semester" name="semester" onchange="checkForm()">
+                                <option value="">Semester</option>
+                                <option>Semester 1</option>
+                                <option>Semester 2</option>
+                                <option>Semester 3</option>
+                                <option>Semester 4</option>
+                                <option>Semester 5</option>
+                                <option>Semester 6</option>
+                                <option>Semester 7</option>
+                                <option>Semester 8</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FACULTY -->
+                <div class="role-fields" id="fields-faculty">
+                    <div class="role-info-box">ℹ️ Enter your institution-issued employee details.</div>
+                    <div class="form-group">
+                        <label for="employee_id">Employee ID</label>
+                        <input type="text" id="employee_id" name="employee_id" placeholder="e.g. FAC-2024-001"
+                            oninput="checkForm()" />
+                    </div>
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" name="department" onchange="checkForm()">
+                            <option value="">Select your department</option>
+                            <option>Computer Science & Engineering</option>
+                            <option>Electronics & Communication</option>
+                            <option>Mechanical Engineering</option>
+                            <option>Civil Engineering</option>
+                            <option>Mathematics</option>
+                            <option>Physics</option>
+                            <option>Chemistry</option>
+                            <option>Management Studies</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- ADMIN -->
+                <div class="role-fields" id="fields-admin">
+                    <div class="role-info-box">ℹ️ Admin access is restricted. Enter your credentials carefully.</div>
+                    <div class="form-group">
+                        <label for="admin_code">Admin ID / Access Code</label>
+                        <input type="text" id="admin_code" name="admin_code" placeholder="e.g. ADMIN-XXXX"
+                            oninput="checkForm()" />
+                        <span class="input-hint">Issued by your institution's IT department</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin_department">Department</label>
+                        <select id="admin_department" name="admin_department" onchange="checkForm()">
+                            <option value="">Select department</option>
+                            <option>Academic Administration</option>
+                            <option>Examination Cell</option>
+                            <option>Student Affairs</option>
+                            <option>IT & Systems</option>
+                            <option>Library</option>
+                            <option>Finance</option>
+                            <option>General Administration</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-submit" id="submit-btn" onclick="submitSignupForm()">
+                    Create Account
+                </button>
+                <p class="submit-hint" id="submit-hint">Select your role and fill all fields to continue</p>
+
+
+                <p class="card-footer">
+                    Already have an account? <a href="{% url 'signin' %}">Sign In</a>
+                </p>
+
+            </form>
+
+
+
+        </div>
+    </main>
+
+    <footer>
+        <span>© 2026 Campuz.</span>
+        <a href="#">Help</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="{% url 'landing' %}">Home</a>
+    </footer>
+
+    <script>
+        var selectedRole = null;
+        var pwOk = false;
+
+        function selectRole(role) {
+            selectedRole = role;
+            document.getElementById('role-input').value = role;
+            ['student', 'faculty', 'admin'].forEach(function (r) {
+                document.getElementById('tab-' + r).classList.toggle('active', r === role);
+                document.getElementById('fields-' + r).classList.toggle('visible', r === role);
+            });
+            checkForm();
+        }
+
+        function togglePw(id) {
+            var inp = document.getElementById(id);
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+        }
+
+        function checkPw() {
+            var pw = document.getElementById('password').value;
+            var cpw = document.getElementById('confirm_password').value;
+            var msg = document.getElementById('pw-msg');
+            if (!cpw) {
+                msg.textContent = ''; pwOk = false;
+            } else if (pw.length < 8) {
+                msg.textContent = '✗ Minimum 8 characters required';
+                msg.className = 'pw-match err'; pwOk = false;
+            } else if (pw === cpw) {
+                msg.textContent = '✓ Passwords match';
+                msg.className = 'pw-match ok'; pwOk = true;
+            } else {
+                msg.textContent = '✗ Passwords do not match';
+                msg.className = 'pw-match err'; pwOk = false;
+            }
+            checkForm();
+        }
+
+        function val(id) {
+            var el = document.getElementById(id);
+            return el ? el.value.trim() : '';
+        }
+
+        function checkForm() {
+            var baseOk = val('username') && val('email') && pwOk && selectedRole;
+            var roleOk = false;
+
+            if (selectedRole === 'student') {
+                roleOk = val('enrollment_number') && val('course') && val('year') && val('semester');
+            } else if (selectedRole === 'faculty') {
+                roleOk = val('employee_id') && val('department');
+            } else if (selectedRole === 'admin') {
+                roleOk = val('admin_code') && val('admin_department');
+            }
+
+            var ready = baseOk && roleOk;
+
+            var hint = document.getElementById('submit-hint');
+            if (ready) {
+                hint.textContent = "Everything looks good — you're ready to go!";
+                hint.className = 'submit-hint ready';
+            } else {
+                hint.textContent = 'Select your role and fill all fields to continue';
+                hint.className = 'submit-hint';
+            }
+        }
+
+        function submitSignupForm() {
+            var baseOk = val('username') && val('email') && pwOk && selectedRole;
+            var roleOk = false;
+
+            if (selectedRole === 'student') {
+                roleOk = val('enrollment_number') && val('course') && val('year') && val('semester');
+            } else if (selectedRole === 'faculty') {
+                roleOk = val('employee_id') && val('department');
+            } else if (selectedRole === 'admin') {
+                roleOk = val('admin_code') && val('admin_department');
+            }
+
+            var ready = baseOk && roleOk;
+            if (ready) {
+                document.getElementById('signup-form').submit();
+            } else {
+                alert("Please select a role and fill out all required fields properly.");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

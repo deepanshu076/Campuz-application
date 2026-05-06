@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Campuz — Student Dashboard Pro</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Syne:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --sb: 260px;
+            --tb: 70px;
+            --ink: #0d1117;
+            --ink2: #161b27;
+            --blue: #4169ff;
+            --blue-h: #2f55e0;
+            --blue-s: #eef1ff;
+            --blue-m: #c3ccff;
+            --bg: #f4f6fb;
+            --white: #ffffff;
+            --text: #111827;
+            --muted: #5b6e8c;
+            --border: #eef2f9;
+            --green: #059669;
+            --amber: #d97706;
+            --red: #dc2626;
+            --purple: #7c3aed;
+            --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.02), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            --shadow-lg: 0 20px 35px -10px rgba(0, 0, 0, 0.08);
+            --radius-md: 16px;
+            --radius-sm: 12px;
+            --transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        /* refined scroll */
+        ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        /* SIDEBAR — elevated & modern */
+        .sb {
+            width: var(--sb);
+            background: var(--ink);
+            backdrop-filter: blur(0px);
+            min-height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 400;
+            transition: transform 0.25s ease-out;
+            border-right: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .sb-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 22px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sb-logo-mark {
+            width: 38px;
+            height: 38px;
+            background: var(--blue);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 6px 12px -6px rgba(65, 105, 255, 0.3);
+        }
+
+        .logo-t {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #FFFFFF 30%, #b9cbff);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .logo-t span {
+            color: #98aeff;
+            background: none;
+            -webkit-background-clip: unset;
+            background-clip: unset;
+        }
+
+        .sb-pill {
+            margin: 20px 18px 10px;
+            background: rgba(65, 105, 255, 0.12);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(65, 105, 255, 0.25);
+            border-radius: 40px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pill-dot {
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 #3b82f6;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .pill-txt {
+            font-family: 'Syne', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #b2c9ff;
+        }
+
+        .sb-nav {
+            flex: 1;
+            padding: 12px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .nav-sec {
+            font-family: 'Syne', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: rgba(255, 255, 255, 0.35);
+            padding: 16px 16px 6px 16px;
+        }
+
+        .ni {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.55);
+            cursor: pointer;
+            transition: var(--transition);
+            margin: 0 4px;
+        }
+
+        .ni i {
+            width: 22px;
+            font-size: 1.2rem;
+        }
+
+        .ni:hover {
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+        }
+
+        .ni.on {
+            background: rgba(65, 105, 255, 0.18);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .sb-foot {
+            padding: 18px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .sb-usr {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .sb-av {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(145deg, #4169ff, #7c3aed);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: white;
+        }
+
+        .sb-uname {
+            font-weight: 800;
+            font-size: 14px;
+            color: white;
+        }
+
+        .sb-email {
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .btn-logout {
+            width: 100%;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 40px;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 12px;
+            color: #fca5a5;
+            backdrop-filter: blur(4px);
+            transition: all 0.2s;
+        }
+
+        .btn-logout:hover {
+            background: rgba(239, 68, 68, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* MAIN */
+        .main {
+            margin-left: var(--sb);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            height: var(--tb);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 200;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            font-size: 22px;
+            color: var(--text);
+        }
+
+        .bc {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--muted);
+        }
+
+        .bc strong {
+            font-weight: 700;
+            color: var(--ink);
+        }
+
+        .tb-greet {
+            font-size: 13px;
+            background: var(--blue-s);
+            padding: 6px 14px;
+            border-radius: 40px;
+            color: var(--blue);
+            font-weight: 600;
+        }
+
+        .tb-av {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(145deg, #4169ff, #7c3aed);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .content {
+            padding: 28px 32px;
+        }
+
+        .panel {
+            display: none;
+            animation: fadeSlideUp 0.3s ease-out;
+        }
+
+        .panel.on {
+            display: block;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ph {
+            margin-bottom: 28px;
+        }
+
+        .ph-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #0d1117, #2a374b);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .ph-sub {
+            font-size: 14px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        /* cards modern */
+        .box,
+        .sc,
+        .post-card,
+        .erp {
+            border-radius: var(--radius-md);
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+
+        .box {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 20px 22px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .bx-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: -0.2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 14px;
+            border-bottom: 1.5px solid var(--border);
+            margin-bottom: 16px;
+        }
+
+        .g4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+
+        .g2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .g3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .sc {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sc-ic {
+            width: 52px;
+            height: 52px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .ib {
+            background: #eef1ff;
+        }
+
+        .ig {
+            background: #e3f9ed;
+        }
+
+        .ia {
+            background: #fff3e3;
+        }
+
+        .ip {
+            background: #f2e9fe;
+        }
+
+        .sc-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .sc-val {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        /* ERP banner premium */
+        .erp {
+            background: radial-gradient(ellipse at 80% 20%, #101826, #0a0f17);
+            border: 1px solid rgba(65, 105, 255, 0.3);
+            padding: 26px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .erp::after {
+            content: "⚡";
+            font-size: 150px;
+            opacity: 0.05;
+            position: absolute;
+            right: -20px;
+            bottom: -40px;
+            pointer-events: none;
+        }
+
+        .btn-erp {
+            background: var(--blue);
+            border-radius: 40px;
+            padding: 12px 26px;
+            font-weight: 800;
+            font-size: 13px;
+            transition: all 0.2s;
+            box-shadow: 0 4px 12px rgba(65, 105, 255, 0.3);
+        }
+
+        .btn-erp:hover {
+            background: var(--blue-h);
+            transform: translateY(-2px);
+        }
+
+        .qa {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 13px;
+            background: #f8fafd;
+            color: var(--text);
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .qa i {
+            font-size: 16px;
+        }
+
+        .qa-b {
+            background: #eef1ff;
+            color: var(--blue);
+            border-color: transparent;
+        }
+
+        .qa-g {
+            background: #e3f9ed;
+            color: var(--green);
+        }
+
+        .qa-a {
+            background: #fff3e3;
+            color: var(--amber);
+        }
+
+        .qa-p {
+            background: #f2e9fe;
+            color: var(--purple);
+        }
+
+        .qa:hover {
+            transform: translateX(5px);
+            filter: brightness(0.97);
+        }
+
+        /* Feed compose */
+        .compose {
+            display: flex;
+            gap: 16px;
+        }
+
+        .c-av {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(145deg, #4169ff, #7c3aed);
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+        }
+
+        .c-ta {
+            background: var(--bg);
+            border: 1.5px solid var(--border);
+            border-radius: 20px;
+            padding: 14px 18px;
+            font-size: 14px;
+            transition: var(--transition);
+        }
+
+        .c-ta:focus {
+            border-color: var(--blue);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(65, 105, 255, 0.1);
+        }
+
+        .btn-post {
+            background: var(--blue);
+            border-radius: 40px;
+            padding: 9px 24px;
+            font-weight: 700;
+        }
+
+        .post-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            padding: 20px 24px;
+            margin-bottom: 18px;
+            transition: var(--transition);
+        }
+
+        .post-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            border-color: #e2e8f0;
+        }
+
+        .p-av {
+            width: 44px;
+            height: 44px;
+            border-radius: 60px;
+            background: linear-gradient(145deg, #4169ff, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .p-chip {
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 10px;
+        }
+
+        .cs {
+            background: #eef1ff;
+            color: var(--blue);
+        }
+
+        .cf {
+            background: #e3f9ed;
+            color: var(--green);
+        }
+
+        .ca {
+            background: #ffeaea;
+            color: var(--red);
+        }
+
+        /* search modern */
+        .srch-wrap {
+            margin-bottom: 22px;
+        }
+
+        .srch-inp {
+            padding: 14px 130px 14px 48px;
+            border-radius: 60px;
+            border: 1.5px solid var(--border);
+            background: white;
+            font-size: 14px;
+        }
+
+        .srch-btn {
+            background: var(--blue);
+            border-radius: 40px;
+            right: 6px;
+            padding: 8px 22px;
+            font-weight: 700;
+        }
+
+        .filter-row {
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .fpill {
+            border-radius: 40px;
+            padding: 6px 18px;
+            font-weight: 600;
+            background: white;
+        }
+
+        /* profile hero */
+        .ph-hero {
+            background: linear-gradient(125deg, #0d1117, #191e2c);
+            border-radius: 28px;
+            padding: 32px 34px;
+            display: flex;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .ph-big-av {
+            width: 84px;
+            height: 84px;
+            background: linear-gradient(145deg, #4169ff, #7c3aed);
+            border-radius: 60px;
+            font-size: 36px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 12px 22px -8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* chatbot card refinement */
+        .chat-preview {
+            background: #f9fafc;
+            border-radius: 24px;
+            padding: 20px;
+        }
+
+        .preview-bubble.b {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* responsive */
+        @media (max-width: 1000px) {
+            .sb {
+                transform: translateX(-100%);
+            }
+
+            .sb.open {
+                transform: translateX(0);
+            }
+
+            .main {
+                margin-left: 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .g4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .g2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .content {
+                padding: 18px;
+            }
+
+            .g4 {
+                grid-template-columns: 1fr;
+            }
+
+            .erp {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 350;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="overlay" id="ov" onclick="closeSB()"></div>
+    <aside class="sb" id="sb">
+        <div class="sb-logo">
+            <div class="sb-logo-mark"><i class="fas fa-graduation-cap"></i></div>
+            <span class="logo-t">Camp<span>uz</span></span>
+        </div>
+        <div class="sb-pill">
+            <div class="pill-dot"></div>
+            <span class="pill-txt">STUDENT PORTAL • LIVE</span>
+        </div>
+        <nav class="sb-nav">
+            <div class="nav-sec">CORE</div>
+            <div class="ni on" id="ni-home" onclick="go('home',this)"><i class="fas fa-compass"></i> Home</div>
+            <div class="ni" id="ni-feed" onclick="go('feed',this)"><i class="fas fa-newspaper"></i> Academic Feed</div>
+            <div class="ni" id="ni-bot" onclick="go('bot',this)"><i class="fas fa-robot"></i> Campuz Assistant</div>
+            <div class="ni" id="ni-search" onclick="go('search',this)"><i class="fas fa-search"></i> Search Users</div>
+            <div class="nav-sec">ACCOUNT</div>
+            <div class="ni" id="ni-profile" onclick="go('profile',this)"><i class="fas fa-user-circle"></i> My Profile
+            </div>
+        </nav>
+        <div class="sb-foot">
+            <div class="sb-usr">
+                <div class="sb-av">{{ request.user.username|first|upper }}</div>
+                <div>
+                    <div class="sb-uname">{{ request.user.username }}</div>
+                    <div class="sb-email">{{ request.user.email }}</div>
+                </div>
+            </div>
+            <a href="{% url 'logout' %}"><button class="btn-logout"><i class="fas fa-sign-out-alt"></i> Sign
+                    Out</button></a>
+        </div>
+    </aside>
+
+    <div class="main">
+        <header class="topbar">
+            <div class="tb-l"><button class="hamburger" onclick="toggleSB()"><i class="fas fa-bars"></i></button>
+                <div class="bc"><i class="fas fa-school"></i> Campuz &rsaquo; <strong id="bc-lbl">Home</strong></div>
+            </div>
+            <div class="tb-r"><span class="tb-greet"><i class="far fa-smile-wink"></i> Hi, <strong>{{
+                        request.user.username }}</strong></span>
+                <div class="tb-av">{{ request.user.username|first|upper }}</div>
+            </div>
+        </header>
+        <div class="content">
+            {% if messages %}<div class="msgs">{% for m in messages %}<div
+                    class="msg {% if m.tags == 'error' %}e{% else %}s{% endif %}">{% if m.tags == 'error' %}⚠️{% else
+                    %}✓{% endif %} {{ m }}</div>{% endfor %}</div>{% endif %}
+
+            <!-- HOME PANEL -->
+            <div class="panel on" id="p-home">
+                <div class="ph">
+                    <div class="ph-title">Welcome back, {{ request.user.username }} 👋</div>
+                    <div class="ph-sub">Your academic command center — insights & updates.</div>
+                </div>
+                <div class="erp">
+                    <div>
+                        <div class="erp-tag" style="font-size:11px;color:#93c5fd;"><i class="fas fa-globe"></i>
+                            INTEGRATED ERP</div>
+                        <div class="erp-title" style="font-size:22px;font-weight:800;">College ERP Portal</div>
+                        <div class="erp-sub" style="color:#a5b4fc;">Results, attendance, timetable & fees</div>
+                    </div><a href="#" target="_blank" class="btn-erp"><i class="fas fa-external-link-alt"></i> Launch
+                        ERP →</a>
+                </div>
+                <div class="g4">
+                    <div class="sc">
+                        <div class="sc-ic ib"><i class="fas fa-id-card"></i></div>
+                        <div>
+                            <div class="sc-label">Enrollment</div>
+                            <div class="sc-val sm">{{ profile.enrollment_number|default:"Not set" }}</div>
+                        </div>
+                    </div>
+                    <div class="sc">
+                        <div class="sc-ic ig"><i class="fas fa-book-open"></i></div>
+                        <div>
+                            <div class="sc-label">Course</div>
+                            <div class="sc-val sm">{{ profile.course|default:"Not set" }}</div>
+                        </div>
+                    </div>
+                    <div class="sc">
+                        <div class="sc-ic ia"><i class="fas fa-calendar-alt"></i></div>
+                        <div>
+                            <div class="sc-label">Year</div>
+                            <div class="sc-val">{{ profile.year|default:"—" }}</div>
+                        </div>
+                    </div>
+                    <div class="sc">
+                        <div class="sc-ic ip"><i class="fas fa-chalkboard-user"></i></div>
+                        <div>
+                            <div class="sc-label">Semester</div>
+                            <div class="sc-val">{{ profile.semester|default:"—" }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="g2">
+                    <div class="box">
+                        <div class="bx-title"><i class="fas fa-bolt"></i> Quick Actions</div><button class="qa qa-b"
+                            onclick="go('feed',document.getElementById('ni-feed'))"><i class="fas fa-scroll"></i>
+                            Academic Feed</button><button class="qa qa-g"
+                            onclick="go('bot',document.getElementById('ni-bot'))"><i class="fas fa-brain"></i> Campuz
+                            Assistant</button><button class="qa qa-a"
+                            onclick="go('search',document.getElementById('ni-search'))"><i class="fas fa-users"></i>
+                            Search Users</button><button class="qa qa-p"
+                            onclick="go('profile',document.getElementById('ni-profile'))"><i
+                                class="fas fa-id-badge"></i> My Profile</button>
+                    </div>
+                    <div class="box">
+                        <div class="bx-title">
+                            <i class="fas fa-clock"></i> Recent Posts 
+                            {% if posts %}
+                                <span class="count" style="margin-left:auto;">{{ posts|length }} total</span>
+                            {% endif %}
+                        </div>
+                        
+                        {% if posts %}
+                            {% for post in posts|slice:":4" %}
+                                <div class="mp" style="margin-bottom:12px;">
+                                    <div class="mp-meta" style="display:flex;gap:10px;align-items:center;">
+                                        <div class="mp-av {% if post.role_tag == 'faculty' %}fac{% elif post.role_tag == 'admin' %}adm{% endif %}"
+                                            style="width:30px;height:30px;border-radius:50%;background:#6c5ce7;display:flex;align-items:center;justify-content:center;">
+                                            {{ post.author.username|first|upper }}
+                                        </div>
+                                        <span class="mp-name" style="font-weight:700;">{{ post.author.username }}</span>
+                                        <span class="mp-time" style="font-size:11px;color:gray;">{{ post.created_at|timesince }} ago</span>
+                                    </div>
+                                    <div class="mp-txt" style="font-size:13px;">{{ post.content|truncatechars:82 }}</div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="empty">
+                                <i class="fas fa-inbox" style="font-size:32px;"></i>
+                                <p>No posts yet. Go to Feed to share!</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- FEED PANEL (unchanged backend, pure UI) -->
+            <div class="panel" id="p-feed">
+                <div class="ph">
+                    <div class="ph-title">📜 Academic Feed</div>
+                    <div class="ph-sub">Share insights, questions, and updates with campus community</div>
+                </div>
+                <div class="box">
+                    <div class="bx-title"><i class="fas fa-pen-fancy"></i> Create a Post</div>
+                    <form method="POST" action="{% url 'feed_create' %}" enctype="multipart/form-data" id="post-form">{%
+                        csrf_token %}<div class="compose">
+                            <div class="c-av">{{ request.user.username|first|upper }}</div>
+                            <div class="c-right"><textarea name="content" class="c-ta" id="c-ta"
+                                    placeholder="Share a resource, update or question..." maxlength="1000"
+                                    oninput="updateCount(this)" required></textarea>
+                                <div class="img-prev-wrap" id="img-pw" style="display:none;"><img id="img-p" src=""
+                                        style="max-height:150px;border-radius:16px;" /><button type="button"
+                                        class="img-rm" onclick="removeImg()">✕</button></div>
+                                <div class="c-foot" style="display:flex;justify-content:space-between;margin-top:12px;">
+                                    <div><label class="attach-lbl" for="img-inp"
+                                            style="background:#f1f5f9;padding:8px 16px;border-radius:40px;"><i
+                                                class="fas fa-image"></i> Add Image</label><input type="file"
+                                            name="image" id="img-inp" accept="image/*" onchange="prevImg(this)"
+                                            style="display:none;" /><span class="char-count" id="char-c"
+                                            style="margin-left:12px;">0 / 1000</span></div><button type="submit"
+                                        class="btn-post"><i class="fas fa-paper-plane"></i> Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                {% if posts %}{% for post in posts %}<div class="post-card">
+                    <div class="p-meta" style="display:flex;gap:12px;align-items:center;">
+                        <div
+                            class="p-av {% if post.role_tag == 'faculty' %}fac{% elif post.role_tag == 'admin' %}adm{% endif %}">
+                            {{ post.author.username|first|upper }}</div>
+                        <div>
+                            <div class="p-name" style="font-weight:800;">{{ post.author.username }}</div>
+                            <div class="p-time" style="font-size:12px;color:gray;">{{ post.created_at|timesince }} ago
+                            </div>
+                        </div><span class="p-chip c{{ post.role_tag|first }}">{{ post.role_tag }}</span>
+                    </div>
+                    <div class="p-body" style="margin-top:8px;">{{ post.content }}</div>{% if post.image %}<img
+                        class="p-img" src="{{ post.image.url }}"
+                        style="max-width:100%;border-radius:20px;margin-top:12px;" />{% endif %}
+                </div>{% endfor %}{% else %}<div class="box">
+                    <div class="empty"><i class="fas fa-feather-alt"></i>
+                        <p>No posts yet. Be the first!</p>
+                    </div>
+                </div>{% endif %}
+            </div>
+
+            <!-- BOT PLACEHOLDER -->
+            <div class="panel" id="p-bot">
+                <div class="ph">
+                    <div class="ph-title">🤖 Campuz Assistant</div>
+                    <div class="ph-sub">AI-powered campus companion (launching soon)</div>
+                </div>
+                <div class="g2">
+                    <div class="box">
+                        <div class="bot-coming" style="text-align:center;"><i class="fas fa-microchip"
+                                style="font-size:56px;color:var(--blue);"></i>
+                            <div class="bot-coming-title" style="font-weight:800;font-size:20px;">Coming Soon</div>
+                            <div class="bot-coming-sub" style="margin:10px 0;">Intelligent Q&A for schedule, fees, and
+                                campus services.</div>
+                            <div class="bot-badge" style="background:#eef1ff;">
+                                <div class="bot-dot-live"></div> Under active development
+                            </div>
+                        </div>
+                        <div class="chat-preview">
+                            <div class="preview-bubble b"><i class="fas fa-robot"></i> Need syllabus details? Ask me
+                                anytime.</div>
+                            <div class="preview-bubble u">Library timings?</div>
+                            <div class="preview-bubble b">Mon–Sat 8am–8pm</div>
+                        </div>
+                        <div class="chat-inp-dis" style="margin-top:14px;"><input class="inp-dis" disabled
+                                placeholder="Assistant offline" /><button class="send-dis" disabled>Send</button></div>
+                    </div>
+                    <div class="box">
+                        <div class="bx-title"><i class="fas fa-list-check"></i> Upcoming features</div>
+                        <div class="feat-list">
+                            <div class="feat-item"><i class="fas fa-comment-dots"></i> Natural language Q&A</div>
+                            <div class="feat-item"><i class="fas fa-clock"></i> Timetable lookup</div>
+                            <div class="feat-item"><i class="fas fa-megaphone"></i> Campus announcements</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEARCH PANEL -->
+            <div class="panel" id="p-search">
+                <div class="ph">
+                    <div class="ph-title">🔍 Search Users</div>
+                    <div class="ph-sub">Connect with peers, faculty, and staff</div>
+                </div>
+                <form method="GET" action="{% url 'search' %}">
+                    <div class="srch-wrap"><i class="fas fa-search"
+                            style="position:absolute;left:20px;top:50%;transform:translateY(-50%);color:gray;"></i><input
+                            type="text" name="q" class="srch-inp" placeholder="Search by name / username"
+                            value="{{ query|default:'' }}" /><button type="submit" class="srch-btn">Search</button>
+                    </div>
+                    <div class="filter-row">
+                        <div class="fpill on" onclick="setFilter(this,'all')">All</div>
+                        <div class="fpill" onclick="setFilter(this,'student')">Students</div>
+                        <div class="fpill" onclick="setFilter(this,'faculty')">Faculty</div>
+                        <div class="fpill" onclick="setFilter(this,'admin')">Admins</div>
+                    </div>
+                </form>
+                <div class="box">
+                    <div class="bx-title">
+                        <i class="fas fa-users-viewfinder"></i> Results 
+                        {% if search_results %}
+                            <span class="count">{{ search_results|length }} found</span>
+                        {% endif %}
+                    </div>
+
+                    {% if search_results %}
+                        {% for u in search_results %}
+                            <div class="u-row" style="display:flex;align-items:center;gap:15px;padding:12px 0;">
+                                <div class="u-av" style="width:44px;height:44px;background:#eef1ff;border-radius:60px;display:flex;align-items:center;justify-content:center;">
+                                    {{ u.username|first|upper }}
+                                </div>
+                                <div>
+                                    <div class="u-name" style="font-weight:700;">{{ u.username }}</div>
+                                    <div class="u-sub" style="font-size:12px;">{{ u.email }}</div>
+                                </div>
+                                <span class="p-chip c{{ u.profile.role|first }}">{{ u.profile.role }}</span>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty">
+                            <i class="fas fa-user-slash"></i>
+                            <p>{% if query %}No results for “{{ query }}”{% else %}Type a name to search{% endif %}</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- PROFILE -->
+            <div class="panel" id="p-profile">
+                <div class="ph">
+                    <div class="ph-title">👤 My Profile</div>
+                    <div class="ph-sub">Personal & academic credentials</div>
+                </div>
+                <div class="ph-hero">
+                    <div class="ph-big-av">{{ request.user.username|first|upper }}</div>
+                    <div>
+                        <div class="ph-name" style="font-size:28px;font-weight:800;color:white;">{{
+                            request.user.username }}</div>
+                        <div class="ph-email" style="color:#cbd5ff;">{{ request.user.email }}</div>
+                        <div class="ph-chip"
+                            style="background:#4169ff20;color:#b2c9ff;border-radius:40px;padding:5px 14px;margin-top:8px;">
+                            <i class="fas fa-graduation-cap"></i> Student</div>
+                    </div>
+                </div>
+                <div class="g2">
+                    <div class="box">
+                        <div class="bx-title"><i class="fas fa-user-detail"></i> Basic</div>
+                        <div class="ir"><span class="ir-l">Username</span><span class="ir-r">{{ request.user.username
+                                }}</span></div>
+                        <div class="ir"><span class="ir-l">Email</span><span class="ir-r">{{ request.user.email
+                                }}</span></div>
+                        <div class="ir"><span class="ir-l">Contact</span><span class="ir-r">{{
+                                profile.contact|default:"—" }}</span></div>
+                        <div class="ir"><span class="ir-l">Role</span><span class="ir-r">{{ profile.role }}</span></div>
+                    </div>
+                    <div class="box">
+                        <div class="bx-title"><i class="fas fa-book"></i> Academic</div>
+                        <div class="ir"><span class="ir-l">Enrollment No.</span><span class="ir-r">{{
+                                profile.enrollment_number|default:"—" }}</span></div>
+                        <div class="ir"><span class="ir-l">Course</span><span class="ir-r">{{ profile.course|default:"—"
+                                }}</span></div>
+                        <div class="ir"><span class="ir-l">Year</span><span class="ir-r">{{ profile.year|default:"—"
+                                }}</span></div>
+                        <div class="ir"><span class="ir-l">Semester</span><span class="ir-r">{{
+                                profile.semester|default:"—" }}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var LABELS = { home: 'Home', feed: 'Academic Feed', bot: 'Campuz Assistant', search: 'Search Users', profile: 'My Profile' };
+        function go(name, navEl) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+            document.querySelectorAll('.ni').forEach(n => n.classList.remove('on'));
+            document.getElementById('p-' + name)?.classList.add('on');
+            if (navEl) navEl.classList.add('on');
+            document.getElementById('bc-lbl').innerText = LABELS[name] || name;
+            closeSB(); window.scrollTo(0, 0);
+        }
+        function toggleSB() { document.getElementById('sb').classList.toggle('open'); document.getElementById('ov').classList.toggle('show'); }
+        function closeSB() { document.getElementById('sb').classList.remove('open'); document.getElementById('ov').classList.remove('show'); }
+        function prevImg(input) { if (input.files[0]) { var r = new FileReader(); r.onload = e => { document.getElementById('img-p').src = e.target.result; document.getElementById('img-pw').style.display = 'block'; }; r.readAsDataURL(input.files[0]); } }
+        function removeImg() { document.getElementById('img-inp').value = ''; document.getElementById('img-p').src = ''; document.getElementById('img-pw').style.display = 'none'; }
+        function updateCount(el) { let n = el.value.length; let c = document.getElementById('char-c'); c.innerText = n + ' / 1000'; c.className = 'char-count' + (n > 900 ? (n >= 1000 ? ' over' : ' warn') : ''); }
+        function setFilter(el, role) { document.querySelectorAll('.fpill').forEach(p => p.classList.remove('on')); el.classList.add('on'); }
+        window.addEventListener('DOMContentLoaded', () => { const hasQuery = "{{ query|default:'' }}"; if (hasQuery) { go('search', document.getElementById('ni-search')); } });
+    </script>
+</body>
+
+</html>
